@@ -2,21 +2,21 @@
 (function() {
     const content = [
         { text: 'whoami', type: 'command' },
-        { text: '\nHello! I\'m Pavel Zarudnev, a software developer with a passion for creating efficient and elegant solutions.', delay: 15 },
-        { text: '\n\n', delay: 150 },
+        { text: '\nHello! I\'m Pavel Zarudnev, a software developer with a passion for creating efficient and elegant solutions.', delay: 1 },
+        { text: '\n\n', delay: 50 },
         
         { text: 'cat contacts.txt', type: 'command' },
-        { text: '\nGet in touch:', delay: 15 },
-        { text: '\n\n', delay: 50 },
+        { text: '\nGet in touch:', delay: 5 },
+        { text: '\n\n', delay: 20 },
         
         { text: 'email', type: 'contact', value: 'pzarudnev93@gmail.com', url: 'mailto:pzarudnev93@gmail.com' },
         { text: 'github', type: 'contact', value: 'github.com/RockinPaul', url: 'https://github.com/RockinPaul' },
         { text: 'linkedin', type: 'contact', value: 'linkedin.com/in/zarudnev', url: 'https://www.linkedin.com/in/zarudnev/' },
-        { text: '\n\n', delay: 150 },
+        { text: '\n\n', delay: 50 },
         
         { text: 'ls -la projects/', type: 'command' },
-        { text: '\nMy Projects:', delay: 15 },
-        { text: '\n\n', delay: 50 },
+        { text: '\nMy Projects:', delay: 5 },
+        { text: '\n\n', delay: 20 },
         
         { text: 'wrapped', type: 'project', title: 'Wrapped', 
           desc: 'Mobile application for finding the best doner kebab or shawarma spots based on the user\'s location.\nAvailable on Google Play: https://play.google.com/store/apps/details?id=com.zarudnev.wrapped' },
@@ -24,7 +24,7 @@
           desc: 'Dart CLI tool that flattens a directory structure.\nGitHub: https://github.com/RockinPaul/Flattener' },
         { text: 'pitchperfect', type: 'project', title: 'PitchPerfect: Musical Notes', 
           desc: 'Mobile application for mastering musical notation.\nAvailable on Google Play: https://play.google.com/store/apps/details?id=com.zarudnev.music' },
-        { text: '\n\n', delay: 50 }
+        { text: '\n\n', delay: 20 }
     ];
 
     const typedText = document.getElementById('typed-text');
@@ -56,12 +56,12 @@
             currentIndex++;
             
             // Remove cursor after a short delay to simulate typing the next command
-            // Reduce delay between commands
+            // Minimal delay between commands
             setTimeout(() => {
                 const cursor = command.querySelector('.cursor');
                 if (cursor) cursor.remove();
                 requestAnimationFrame(typeWriter);
-            }, 100);
+            }, 50);
             return;
         }
 
