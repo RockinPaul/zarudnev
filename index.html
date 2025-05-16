@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zarudnev:~$</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" as="font" type="font/woff2" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Hack&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hack&display=swap"></noscript>
+    <style>
+        /* Critical CSS */
+        body { margin: 0; padding: 20px; background: #000; color: #38D203; font-family: 'Hack', monospace; line-height: 1.6; overflow-x: hidden; }
+        .terminal { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .prompt { margin-bottom: 1em; white-space: pre-wrap; word-break: break-all; }
+        .content { min-height: 200px; }
+        @keyframes blink { from, to { opacity: 0; } 50% { opacity: 1; } }
+        .cursor { display: inline-block; width: 10px; height: 20px; background-color: #38D203; animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 2px; }
+    </style>
+    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+</head>
+<body>
+    <div class="terminal">
+        <div class="prompt"><span id="typed-text"></span></div>
+        <div id="content" class="content"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
