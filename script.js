@@ -54,6 +54,12 @@
       title: "PitchPerfect: Musical Notes",
       desc: "Mobile application for mastering musical notation.\nAvailable on https://play.google.com/store/apps/details?id=com.zarudnev.music",
     },
+    {
+      text: "radioactivity",
+      type: "project",
+      title: "Radioactivity",
+      desc: "Internet radio browser.\nAvailable on https://play.google.com/store/apps/details?id=com.zarudnev.radioactivity",
+    },
     { text: "\n\n", delay: 10 },
   ];
 
