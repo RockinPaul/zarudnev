@@ -3,14 +3,14 @@
   const content = [
     { text: "whoami", type: "command" },
     {
-      text: "\nHello! I'm Pavel Zarudnev, a software developer with a passion for creating efficient and elegant solutions.",
+      text: "\nHello! I'm Paul, a software developer with a passion for creating efficient and elegant solutions.",
       delay: 1,
     },
-    { text: "\n\n", delay: 50 },
+    { text: "\n\n", delay: 25 },
 
     { text: "cat contacts.txt", type: "command" },
     { text: "\nGet in touch:", delay: 5 },
-    { text: "\n\n", delay: 20 },
+    { text: "\n\n", delay: 10 },
 
     {
       text: "email",
@@ -30,11 +30,11 @@
       value: "linkedin.com/in/zarudnev",
       url: "https://www.linkedin.com/in/zarudnev/",
     },
-    { text: "\n\n", delay: 50 },
+    { text: "\n\n", delay: 10 },
 
     { text: "ls -la projects/", type: "command" },
-    { text: "\nMy Projects:", delay: 5 },
-    { text: "\n\n", delay: 20 },
+    { text: "My Projects:", type: "sectionTitle", delay: 5 },
+    { text: "\n\n", delay: 10 },
 
     {
       text: "wrapped",
@@ -54,7 +54,7 @@
       title: "PitchPerfect: Musical Notes",
       desc: "Mobile application for mastering musical notation.\nAvailable on https://play.google.com/store/apps/details?id=com.zarudnev.music",
     },
-    { text: "\n\n", delay: 20 },
+    { text: "\n\n", delay: 10 },
   ];
 
   const typedText = document.getElementById("typed-text");
@@ -91,7 +91,7 @@
         const cursor = command.querySelector(".cursor");
         if (cursor) cursor.remove();
         requestAnimationFrame(typeWriter);
-      }, 50);
+      }, 25);
       return;
     }
 
@@ -126,7 +126,7 @@
             `;
       contentDiv.appendChild(project);
       currentIndex++;
-      setTimeout(typeWriter, 100);
+      setTimeout(typeWriter, 50);
       return;
     }
 
@@ -138,8 +138,38 @@
             `;
       contentDiv.appendChild(contact);
       currentIndex++;
-      setTimeout(typeWriter, 50);
+      setTimeout(typeWriter, 25);
       return;
+    }
+
+    if (item.type === "sectionTitle") {
+      const sectionDiv = document.createElement("div");
+      sectionDiv.className = "section"; // This div gets the 6em top margin from styles.css
+
+      const textNode = document.createTextNode("");
+      sectionDiv.appendChild(textNode);
+      contentDiv.appendChild(sectionDiv);
+
+      let charIndexLocal = 0;
+      const textToType = item.text.trim(); // Trim newlines for display
+
+      function typeSectionTitleChar() {
+        if (charIndexLocal < textToType.length) {
+          textNode.nodeValue += textToType.charAt(charIndexLocal);
+          charIndexLocal++;
+          const typingDelay = item.delay || 25; // Use item.delay, fallback
+          if (typingDelay > 10) { // Consistent with existing animation logic
+            setTimeout(typeSectionTitleChar, typingDelay);
+          } else {
+            requestAnimationFrame(typeSectionTitleChar);
+          }
+        } else {
+          currentIndex++; // Move to the next content item
+          setTimeout(typeWriter, 150); // Call typeWriter for the next item
+        }
+      }
+      typeSectionTitleChar(); // Initiate typing for the section title
+      return; // Ensure this item is fully handled
     }
 
     // Regular text typing
@@ -151,8 +181,12 @@
 
       function typeChar() {
         if (charIndex < item.text.length) {
-          textNode.nodeValue += item.text.charAt(charIndex);
-          charIndex++;
+          const charsPerFrame = (item.delay <= 10 && item.delay > 0) ? 2 : 1; // Type 2 chars if RAF & delay > 0
+          for (let i = 0; i < charsPerFrame && charIndex < item.text.length; i++) {
+            textNode.nodeValue += item.text.charAt(charIndex);
+            charIndex++;
+          }
+
           // Use requestAnimationFrame for smoother animation
           if (item.delay > 10) {
             setTimeout(typeChar, item.delay);
@@ -162,7 +196,7 @@
         } else {
           isTyping = false;
           currentIndex++;
-          setTimeout(typeWriter, 300);
+          setTimeout(typeWriter, 150);
         }
       }
 

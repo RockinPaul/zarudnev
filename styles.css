@@ -1,2 +1,120 @@
 /* Minified and optimized CSS */
-*{margin:0;padding:0;box-sizing:border-box}body{background:#000;color:#38D203;font-family:'Hack',monospace;line-height:1.6;padding:20px;overflow-x:hidden}.terminal{max-width:800px;margin:0 auto;padding:20px}.prompt{margin-bottom:1em;white-space:pre-wrap;word-break:break-all}.content{min-height:200px}@keyframes blink{from,to{opacity:0}50%{opacity:1}}.cursor{display:inline-block;width:10px;height:20px;background:#38D203;animation:blink 1s step-end infinite;vertical-align:middle;margin-left:2px}a{color:#33ccff;text-decoration:none;border-bottom:1px dashed #33ccff}a:hover{color:#38D203;border-bottom-style:solid}.command{color:#33ccff}.arg{color:#ffcc33}.divider{color:#666;margin:1.5em 0}.section{margin:1.5em 0}.project{margin:1em 0 1em 2em}.project-title{color:#ff9933;font-weight:700}.project-desc{margin-left:2em;color:#ccc}.contact-item{margin:.5em 0 .5em 2em}@media (max-width:600px){body{padding:10px;font-size:14px}.terminal{padding:10px}}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box
+}
+
+body {
+  background: #000;
+  color: #38D203;
+  font-family: 'Hack', monospace;
+  line-height: 1.6;
+  padding: 20px;
+  overflow-x: hidden
+}
+
+.terminal {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px
+}
+
+.prompt {
+  margin-top: 3.5em;
+  margin-bottom: 0.3em;
+  white-space: pre-wrap;
+  word-break: break-all
+}
+
+.content {
+  min-height: 200px
+}
+
+@keyframes blink {
+
+  from,
+  to {
+    opacity: 0
+  }
+
+  50% {
+    opacity: 1
+  }
+}
+
+.cursor {
+  display: inline-block;
+  width: 10px;
+  height: 20px;
+  background: #38D203;
+  animation: blink 1s step-end infinite;
+  vertical-align: middle;
+  margin-left: 2px
+}
+
+a {
+  color: #33ccff;
+  text-decoration: none;
+  border-bottom: 1px dashed #33ccff
+}
+
+a:hover {
+  color: #38D203;
+  border-bottom-style: solid
+}
+
+.command {
+  color: #33ccff
+}
+
+.arg {
+  color: #ffcc33
+}
+
+.divider {
+  color: #666;
+  margin: 1.5em 0
+}
+
+.section {
+  margin: 4em 0 1.5em 0
+}
+
+.project {
+  margin: 0.3em 0 1em 2em
+}
+
+.project-title {
+  color: #ff9933;
+  font-weight: 700
+}
+
+.project-desc {
+  margin-left: 2em;
+  color: #ccc
+}
+
+.contact-item {
+  margin: .5em 0 .5em 2em
+}
+
+.contact-item .arg {
+  color: #ff9933; /* Match project title color */
+  font-weight: 700; /* Match project title font-weight */
+}
+
+.prompt + .section {
+  margin-top: 0.5em; /* Reduce space when a section follows a command prompt */
+}
+
+@media (max-width:600px) {
+  body {
+    padding: 10px;
+    font-size: 14px
+  }
+
+  .terminal {
+    padding: 10px
+  }
+}
