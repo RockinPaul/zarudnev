@@ -1,0 +1,23 @@
+/* TEAM */
+    Site: zarudnev.com
+    Twitter: @yourtwitter
+    From: Berlin, Germany
+
+/* THANKS */
+    Name: Pavel Zarudnev
+    Site: https://zarudnev.com
+    Twitter: @yourtwitter
+    Location: Berlin, Germany
+
+/* SITE */
+    Last update: 2025/05/16
+    Language: English
+    Doctype: HTML5
+    IDE: VS Code
+    Components: 
+        HTML5, CSS3, JavaScript
+    Software:
+        Git, GitHub
+
+/* NOTE */
+    Made with ❤️ in Berlin

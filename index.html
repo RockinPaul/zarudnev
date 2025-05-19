@@ -4,13 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>zarudnev:~$</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" as="font" type="font/woff2" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Hack&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hack&display=swap"></noscript>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+    <meta name="robots" content="index, follow">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <style>
-        /* Critical CSS */
-        body { margin: 0; padding: 20px; background: #000; color: #38D203; font-family: 'Hack', monospace; line-height: 1.6; overflow-x: hidden; }
+        /* Critical CSS with system font fallback */
+        body { 
+            margin: 0; 
+            padding: 20px; 
+            background: #000; 
+            color: #38D203; 
+            font-family: 'Fira Code', 'Roboto Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace; 
+            line-height: 1.6; 
+            overflow-x: hidden; 
+        }
+        /* Load Hack font asynchronously */
+        @import url('https://fonts.googleapis.com/css2?family=Hack&display=swap');
+        /* Apply Hack font when it's loaded */
+        .hack-loaded body {
+            font-family: 'Hack', 'Fira Code', 'Roboto Mono', 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+        }
         .terminal { max-width: 800px; margin: 0 auto; padding: 20px; }
         .prompt { margin-bottom: 1em; white-space: pre-wrap; word-break: break-all; }
         .content { min-height: 200px; }
@@ -24,6 +39,29 @@
         <div class="prompt"><span id="typed-text"></span></div>
         <div id="content" class="content"></div>
     </div>
+    <script>
+        // Check if Hack font is available
+        const checkFont = () => {
+            if (document.fonts.check('1em Hack')) {
+                document.documentElement.classList.add('hack-loaded');
+                return true;
+            }
+            return false;
+        };
+
+        // Initial check
+        if (!checkFont()) {
+            // Check again after a short delay
+            setTimeout(() => {
+                if (!checkFont()) {
+                    // If still not loaded, check again after fonts are loaded
+                    document.fonts.ready.then(() => {
+                        checkFont();
+                    });
+                }
+            }, 100);
+        }
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
