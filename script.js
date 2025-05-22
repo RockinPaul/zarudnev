@@ -111,17 +111,23 @@
       const project = document.createElement("div");
       project.className = "project";
 
-      // Process description to make links clickable and format Google Play links
+      // Process description to make links clickable and format app store links
       const processLinks = (text) => {
-        // First, replace Google Play URLs with 'Google Play' text
+        // Replace Google Play URLs with 'Google Play' text
         text = text.replace(
           /(https?:\/\/play\.google\.com\/store\/apps\/details\?id=[^\s)]+)/g,
           (url) =>
             `<a href="${url}" target="_blank" rel="noopener noreferrer">Google Play</a>`
         );
-        // Then handle other URLs (like GitHub)
+        // Replace App Store URLs with 'App Store' text
+        text = text.replace(
+          /(https?:\/\/apps\.apple\.com\/us\/app\/[^\s)]+)/g,
+          (url) =>
+            `<a href="${url}" target="_blank" rel="noopener noreferrer">App Store</a>`
+        );
+        // Handle other URLs (like GitHub)
         return text.replace(
-          /(https?:\/\/(?!play\.google\.com)[^\s)]+)/g,
+          /(https?:\/\/(?!(play\.google\.com|apps\.apple\.com))[^\s)]+)/g,
           (url) =>
             `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`
         );
