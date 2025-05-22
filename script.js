@@ -60,6 +60,12 @@
       title: "Radioactivity",
       desc: "Internet radio browser.\nAvailable on https://play.google.com/store/apps/details?id=com.zarudnev.radioactivity",
     },
+    {
+      text: "propup",
+      type: "project",
+      title: "PropUp",
+      desc: "Mobile app for real estate property management platform. Available on https://apps.apple.com/us/app/propup/id1609091570",
+    },
     { text: "\n\n", delay: 10 },
   ];
 
