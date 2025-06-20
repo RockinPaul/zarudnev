@@ -52,7 +52,7 @@
       text: "pitchperfect",
       type: "project",
       title: "PitchPerfect: Musical Notes",
-      desc: "Mobile application for mastering musical notation.\nAvailable on https://play.google.com/store/apps/details?id=com.zarudnev.music",
+      desc: "Mobile application for mastering musical notation.\nAvailable on https://play.google.com/store/apps/details?id=com.zarudnev.music_notes",
     },
     {
       text: "radioactivity",
