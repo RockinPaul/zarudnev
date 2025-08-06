@@ -61,10 +61,10 @@
       desc: "Internet radio browser.\nAvailable on https://play.google.com/store/apps/details?id=com.zarudnev.radioactivity",
     },
     {
-      text: "propup",
+      text: "indanger",
       type: "project",
-      title: "PropUp",
-      desc: "Mobile app for real estate property management platform.\nAvailable on https://apps.apple.com/us/app/propup/id1609091570",
+      title: "InDanger",
+      desc: "Mobile app for humorous detection of danger levels in animals. Uses AI for image recognition and analysis.\nAvailable on https://play.google.com/store/apps/details?id=com.zarudnev.in_danger",
     },
     { text: "\n\n", delay: 10 },
   ];
