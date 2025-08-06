@@ -37,6 +37,12 @@
     { text: "\n\n", delay: 10 },
 
     {
+      text: "indanger",
+      type: "project",
+      title: "InDanger",
+      desc: "Mobile app for humorous detection of danger levels in animals.\nUses AI for image recognition and analysis.\nAvailable on https://play.google.com/store/apps/details?id=com.zarudnev.in_danger",
+    },
+    {
       text: "wrapped",
       type: "project",
       title: "Wrapped",
@@ -59,12 +65,6 @@
       type: "project",
       title: "Radioactivity",
       desc: "Internet radio browser.\nAvailable on https://play.google.com/store/apps/details?id=com.zarudnev.radioactivity",
-    },
-    {
-      text: "indanger",
-      type: "project",
-      title: "InDanger",
-      desc: "Mobile app for humorous detection of danger levels in animals. Uses AI for image recognition and analysis.\nAvailable on https://play.google.com/store/apps/details?id=com.zarudnev.in_danger",
     },
     { text: "\n\n", delay: 10 },
   ];
@@ -176,7 +176,8 @@
           textNode.nodeValue += textToType.charAt(charIndexLocal);
           charIndexLocal++;
           const typingDelay = item.delay || 25; // Use item.delay, fallback
-          if (typingDelay > 10) { // Consistent with existing animation logic
+          if (typingDelay > 10) {
+            // Consistent with existing animation logic
             setTimeout(typeSectionTitleChar, typingDelay);
           } else {
             requestAnimationFrame(typeSectionTitleChar);
@@ -199,8 +200,12 @@
 
       function typeChar() {
         if (charIndex < item.text.length) {
-          const charsPerFrame = (item.delay <= 10 && item.delay > 0) ? 2 : 1; // Type 2 chars if RAF & delay > 0
-          for (let i = 0; i < charsPerFrame && charIndex < item.text.length; i++) {
+          const charsPerFrame = item.delay <= 10 && item.delay > 0 ? 2 : 1; // Type 2 chars if RAF & delay > 0
+          for (
+            let i = 0;
+            i < charsPerFrame && charIndex < item.text.length;
+            i++
+          ) {
             textNode.nodeValue += item.text.charAt(charIndex);
             charIndex++;
           }
