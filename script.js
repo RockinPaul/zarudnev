@@ -39,7 +39,7 @@
     {
       text: "indanger",
       type: "project",
-      title: "InDanger",
+      title: "InDanger: AI Hazard Detector",
       desc: "Mobile app for humorous detection of danger levels in animals.\nUses AI for image recognition and analysis.\nAvailable on https://play.google.com/store/apps/details?id=com.zarudnev.in_danger",
     },
     {
