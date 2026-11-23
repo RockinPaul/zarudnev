@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Day Support — Pavel Zarudnev</title>
+  <meta name="description" content="Support for Day, a Mac app for Markdown notes, tasks, and calendar planning. Recover your notes folder, fix Calendar access, and report an issue.">
+  <link rel="canonical" href="https://zarudnev.com/day/support">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/day/day.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span>Day</a>
+      <nav class="site-nav" aria-label="Day pages">
+        <a href="/day/support" aria-current="page">Support</a>
+        <a href="/day/privacy">Privacy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <h1>Day Support</h1>
+    <p class="lede">Day is a Mac app for daily Markdown notes, tasks, and calendar planning, developed by Pavel Zarudnev. Start here if Day cannot find your notes or calendar.</p>
+    <p class="meta">Day requires macOS 14 or later. Email <a href="mailto:pzarudnev93@gmail.com">pzarudnev93@gmail.com</a> if you still need help.</p>
+
+    <section aria-labelledby="notes">
+      <h2 id="notes">Find or recover your notes folder</h2>
+      <p>Day saves your notes in the folder you chose, in files named <code>YYYY-MM-DD.md</code>. You can open them with any text editor.</p>
+      <ol>
+        <li>In Day, open <strong>Day → Settings… → Notes</strong>.</li>
+        <li>Click <strong>Reveal in Finder</strong> to see the folder and today's file.</li>
+        <li>If Day cannot open the folder, reconnect any external drive, then click <strong>Change…</strong> and choose the folder again. If the folder was moved or renamed, choose its new location.</li>
+      </ol>
+
+      <div class="callout">
+        <h3>If the folder is missing</h3>
+        <p>Restore it from your backup or sync service first. Do not create a new empty folder with the same name and assume your notes are there; Day will show only the files that exist in the folder you select.</p>
+      </div>
+
+      <p>Day remembers access to the folder with a security-scoped bookmark. If the folder is on a synced service, wait for that service to finish syncing before you reselect it. Keep a backup of the folder.</p>
+    </section>
+
+    <section aria-labelledby="calendar">
+      <h2 id="calendar">Calendar access and writable calendars</h2>
+      <p>Calendar access is optional. Notes and tasks work without it.</p>
+
+      <h3>Events do not appear</h3>
+      <ol>
+        <li>Open <strong>System Settings → Privacy &amp; Security → Calendars</strong> and enable Day.</li>
+        <li>Quit and reopen Day.</li>
+        <li>Check that the calendar account is set up in macOS Calendar or Internet Accounts. Day shows the calendars macOS Calendar already syncs; it does not add accounts itself.</li>
+      </ol>
+
+      <h3>You cannot schedule an event</h3>
+      <ol>
+        <li>In Day, open <strong>Day → Settings… → Calendar</strong>.</li>
+        <li>Under <strong>Calendar for new events</strong>, choose a calendar that allows changes.</li>
+        <li>Read-only calendars, such as some subscribed calendars, cannot receive new events. If the list has no writable calendar, add one in Calendar or Internet Accounts, then reopen Day.</li>
+      </ol>
+
+      <p>You can revoke Calendar access at any time in System Settings. Day keeps working for notes and tasks.</p>
+    </section>
+
+    <section aria-labelledby="report">
+      <h2 id="report">Report an issue</h2>
+      <p>Email <a href="mailto:pzarudnev93@gmail.com?subject=Day%20support">pzarudnev93@gmail.com</a> with:</p>
+      <ul>
+        <li>The Day version and build from <strong>Day → About Day</strong>.</li>
+        <li>Your macOS version.</li>
+        <li>What you did, what you expected, and what happened.</li>
+        <li>Whether Calendar access is on, and whether the notes folder is local or synced.</li>
+      </ul>
+
+      <div class="callout">
+        <h3>Do not send private attachments</h3>
+        <p>Send only what you are comfortable sharing. Do not attach your notes folder, a calendar export, or screenshots containing private notes, events, email addresses, or other personal data. If a screenshot is needed, use a disposable notes folder and a test calendar, or redact the private parts.</p>
+      </div>
+    </section>
+
+    <nav class="page-links" aria-label="More Day pages">
+      <a href="/day/privacy">Day privacy policy</a>
+      <a href="/">Pavel Zarudnev's site</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p>Day is developed by Pavel Zarudnev.</p>
+      <p>Support: <a href="mailto:pzarudnev93@gmail.com">pzarudnev93@gmail.com</a></p>
+    </div>
+  </footer>
+</body>
+</html>
