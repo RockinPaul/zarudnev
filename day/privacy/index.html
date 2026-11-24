@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Day Privacy Policy — Pavel Zarudnev</title>
-  <meta name="description" content="How Day, a Mac app for Markdown notes, tasks, and calendar planning, handles notes, Calendar access, widgets, support email, and website requests.">
+  <meta name="description" content="How Day, a Mac app that puts events on your calendar in one line, handles calendar access, optional Markdown notes, widgets, support email, and website requests.">
   <link rel="canonical" href="https://zarudnev.com/day/privacy">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/day/day.css">
@@ -24,44 +24,47 @@
 
   <main id="main">
     <h1>Day Privacy Policy</h1>
-    <p class="lede">Day is a Mac app for daily Markdown notes, tasks, and calendar planning, developed by Pavel Zarudnev. In this policy, “I” means Pavel Zarudnev. This page explains what Day does with your information, and what happens when you contact support or visit these pages.</p>
-    <p class="meta">Effective date: <time datetime="2026-11-23">23 November 2026</time></p>
+    <p class="lede">Day is a Mac app that puts an event on your existing calendar in one line, developed by Pavel Zarudnev. In this policy, “I” means Pavel Zarudnev. This page explains what Day does with your information, and what happens when you contact support or visit these pages.</p>
+    <p class="meta">Effective date: <time datetime="2026-11-24">24 November 2026</time></p>
 
     <div class="callout">
       <h2>At a glance</h2>
       <ul>
         <li>Day has no account, no Day-operated server, no analytics, no advertising, and no tracking SDKs.</li>
-        <li>Your notes and tasks are Markdown files in a folder you choose on your Mac.</li>
-        <li>Calendar access is optional. If you grant it, Day uses macOS Calendar to show events and save changes you make.</li>
+        <li>Type one line, check the preview, press Return. Day writes the event to your existing calendar through macOS Calendar, after you grant access.</li>
+        <li>Calendar access is requested when you save your first event, or from the banner or Settings. Typing and previewing work without it.</li>
+        <li>Notes and tasks are optional Markdown files in a folder you choose. Day has no sync service of its own.</li>
         <li>Day and its widgets share local preferences and a local snapshot through an app group on your Mac.</li>
-        <li>If you choose a synced folder or calendar account, the service you selected handles that sync under its own policy.</li>
+        <li>If you choose a synced folder or a calendar account, the provider you selected handles that sync under its own policy.</li>
         <li>Support email is voluntary; this website's host may process standard request data.</li>
       </ul>
     </div>
 
     <section aria-labelledby="notes">
       <h2 id="notes">Notes and tasks stay in your folder</h2>
-      <p>Day stores one Markdown file per day, named <code>YYYY-MM-DD.md</code>, in a folder you choose. Day reads and writes those files when you add, edit, complete, defer, schedule, or delete a line. A security-scoped bookmark is stored locally so Day can reopen the folder after a relaunch.</p>
-      <p>The Markdown files are your main record. Day does not upload them to a Day-operated server. You can edit or delete them in the folder you selected; if you use a sync service, that service may also keep copies or backups.</p>
+      <p>Notes are optional and off by default. If you choose a folder, Day stores one Markdown file per day, named <code>YYYY-MM-DD.md</code>. Day reads and writes those files when you add, edit, complete, defer, schedule, or delete a line. A security-scoped bookmark is stored locally so Day can reopen the folder after a relaunch.</p>
+      <p>The Markdown files are your record. Day does not upload them to a Day-operated server. You can edit or delete them in the folder you selected; if that folder is in a synced location, the provider may keep copies or backups under its own policy.</p>
       <p>Day has no account, sign-in, hosted sync, analytics, advertising, or tracking SDK. Its own code contains no network client.</p>
     </section>
 
     <section aria-labelledby="calendar">
       <h2 id="calendar">Calendar access is optional</h2>
-      <p>Day asks for Calendar access during setup. If you grant it, Day uses Apple's EventKit to display events from macOS Calendar and to create, edit, or cancel events when you ask. Calendar data stays with macOS and your calendar provider, except for local information Day uses for planning and widgets. Day does not send it to Pavel Zarudnev or a Day-operated server.</p>
-      <p>If you deny or later revoke access, notes and tasks keep working. You can change access in <strong>System Settings → Privacy &amp; Security → Calendars</strong>.</p>
+      <p>Day asks for Calendar access when you press Return to save your first event, or when you choose to grant it from the banner or Settings. Until then you can type and preview; nothing is written to your calendar.</p>
+      <p>If you grant access, Day uses Apple's EventKit to display events from macOS Calendar and to create, edit, or cancel events when you ask. Calendar data stays with macOS and your calendar provider, except for the local information Day uses for planning and widgets. Day does not send it to Pavel Zarudnev or a Day-operated server, and Day never uploads it.</p>
+      <p>If you deny or later revoke access, scheduling cannot save, but Day keeps your text and explains what to change. Notes and tasks keep working. You can change access in <strong>System Settings → Privacy &amp; Security → Calendars</strong>.</p>
       <p>Calendar accounts such as iCloud, Google, or Exchange are managed by macOS and your provider. Their sync and privacy practices are their own.</p>
     </section>
 
     <section aria-labelledby="widgets">
       <h2 id="widgets">Widgets and local cache</h2>
-      <p>Day's widget extension reads a local snapshot from the app group shared by the app and the widget. The snapshot contains event titles, times, and identifiers; open task text and line references; and meeting note counts. Pending task toggles are queued as local files in the same app group container. Day uses this data to draw the widget and to apply a task toggle when the app next runs.</p>
+      <p>Day's widget extension reads a local snapshot from the app group shared by the app and the widget. The snapshot contains event titles, times, and identifiers; open task text and line references; and meeting note counts. Pending task toggles are queued as local files in the same app group container. Day uses this data to draw the widget, to open an event in Day when you click it, and to apply a task toggle when the app next runs.</p>
+      <p>Checking off a task or adding a meeting note from a widget needs a notes folder. Without one, the widget shows calendar events only.</p>
       <p>This widget data stays on your Mac. Day does not send it to a Day-operated server. The app and widget also share local preferences, such as your time format, through the same app group.</p>
     </section>
 
     <section aria-labelledby="sync">
       <h2 id="sync">Sync you choose</h2>
-      <p>Day does not sync your files. If you put the notes folder in iCloud Drive, Dropbox, a git repository, or another synced location, that service may upload and store the Markdown files under its own terms and privacy policy. The same applies to calendar accounts you add to macOS.</p>
+      <p>Day does not sync your files and has no sync service of its own. If you put the notes folder in iCloud Drive, Dropbox, OneDrive, or another synced location, that provider uploads and stores the Markdown files under its own terms and privacy policy. Day does not control or see that sync. The same applies to calendar accounts you add to macOS.</p>
     </section>
 
     <section aria-labelledby="links">
@@ -73,7 +76,7 @@
       <h2 id="support">Support email you send voluntarily</h2>
       <p>If you email <a href="mailto:pzarudnev93@gmail.com">pzarudnev93@gmail.com</a>, you choose what to include. I receive your email address, your message, and any attachments you send. I use this information to answer your request and troubleshoot the issue.</p>
       <p>Support correspondence may be retained to respond to your request, follow up, or meet legal obligations. You can email me to request deletion of correspondence you’ve sent. The email provider also processes the messages under its own policies.</p>
-      <p>Please don’t send private notes, calendar exports, or unredacted screenshots. The <a href="/day/support">support page</a> explains how to report an issue without private attachments.</p>
+      <p>Please don’t send private notes, calendar exports, or unredacted screenshots. The <a href="/day/support">support page</a> explains how to report an issue without private attachments. If you are testing a TestFlight build, you can also send feedback from the TestFlight app.</p>
     </section>
 
     <section aria-labelledby="website">
@@ -92,6 +95,7 @@
     </section>
 
     <nav class="page-links" aria-label="More Day pages">
+      <a href="/day">Day product page</a>
       <a href="/day/support">Day support</a>
       <a href="/">Pavel Zarudnev's site</a>
     </nav>
