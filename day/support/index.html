@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Day Support — Pavel Zarudnev</title>
-  <meta name="description" content="Support for Day, a Mac app for Markdown notes, tasks, and calendar planning. Recover your notes folder, fix Calendar access, and report an issue.">
+  <meta name="description" content="Support for Day, a Mac app that puts an event on your calendar in one line. Fix Calendar access, the When? prompt, the optional notes folder, and widgets.">
   <link rel="canonical" href="https://zarudnev.com/day/support">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/day/day.css">
@@ -24,45 +24,66 @@
 
   <main id="main">
     <h1>Day Support</h1>
-    <p class="lede">Day is a Mac app for daily Markdown notes, tasks, and calendar planning, developed by Pavel Zarudnev. Start here if Day cannot find your notes or calendar.</p>
-    <p class="meta">Day requires macOS 14 or later. Email <a href="mailto:pzarudnev93@gmail.com">pzarudnev93@gmail.com</a> if you still need help.</p>
+    <p class="lede">Day puts an event on your existing calendar in one line. Type a sentence, check the preview, press Return. Start here if Day does not schedule what you expected or cannot reach your calendar.</p>
+    <p class="meta">Day requires macOS 14 or later. Email <a href="mailto:pzarudnev93@gmail.com">pzarudnev93@gmail.com</a> if you still need help. If you are testing a TestFlight build, send feedback from the TestFlight app.</p>
 
-    <section aria-labelledby="notes">
-      <h2 id="notes">Find or recover your notes folder</h2>
-      <p>Day saves your notes in the folder you chose, in files named <code>YYYY-MM-DD.md</code>. You can open them with any text editor.</p>
+    <section aria-labelledby="schedule">
+      <h2 id="schedule">Schedule an event in one line</h2>
+      <p>Press <strong>⌃⌥Space</strong> (the default; you can change it in Settings) from any app. Type a line such as <code>Call Sarah tomorrow at 3pm for 45 minutes</code>. The preview shows the title, date, start and end time, and destination calendar. Press Return to save. Change 45 to 30 and the end time updates before you save.</p>
+      <p>Esc closes the panel without saving, and the main window stays closed.</p>
+    </section>
+
+    <section aria-labelledby="when">
+      <h2 id="when">Day asked “When?”</h2>
+      <p>You pressed Return on a line with no time. Day kept your exact text and keyboard focus, and the first Return saved nothing.</p>
       <ol>
-        <li>In Day, open <strong>Day → Settings… → Notes</strong>.</li>
-        <li>Click <strong>Reveal in Finder</strong> to see the folder and today's file.</li>
-        <li>If Day cannot open the folder, reconnect any external drive, then click <strong>Change…</strong> and choose the folder again. If the folder was moved or renamed, choose its new location.</li>
+        <li>Add a time to the text, for example <code>Call Sarah tomorrow 3pm</code>, or pick a time in the preview.</li>
+        <li>Press Return once more. The preview resolves, and one Return creates one event.</li>
+        <li>Pressing Return again on the same bare text changes nothing: no duplicate, no lost text.</li>
       </ol>
-
-      <div class="callout">
-        <h3>If the folder is missing</h3>
-        <p>Restore it from your backup or sync service first. Do not create a new empty folder with the same name and assume your notes are there; Day will show only the files that exist in the folder you select.</p>
-      </div>
-
-      <p>Day remembers access to the folder with a security-scoped bookmark. If the folder is on a synced service, wait for that service to finish syncing before you reselect it. Keep a backup of the folder.</p>
     </section>
 
     <section aria-labelledby="calendar">
-      <h2 id="calendar">Calendar access and writable calendars</h2>
-      <p>Calendar access is optional. Notes and tasks work without it.</p>
+      <h2 id="calendar">Calendar access</h2>
+      <p>Day asks for Calendar access when you press Return to save your first event, or any time from the banner or Settings. Typing and previewing work without it.</p>
 
-      <h3>Events do not appear</h3>
+      <h3>If you denied access</h3>
       <ol>
         <li>Open <strong>System Settings → Privacy &amp; Security → Calendars</strong> and enable Day.</li>
-        <li>Quit and reopen Day.</li>
-        <li>Check that the calendar account is set up in macOS Calendar or Internet Accounts. Day shows the calendars macOS Calendar already syncs; it does not add accounts itself.</li>
+        <li>Return to Day and press Return again. Your text is still in the panel.</li>
       </ol>
 
-      <h3>You cannot schedule an event</h3>
+      <h3>No writable calendar, or the calendar is read-only</h3>
       <ol>
-        <li>In Day, open <strong>Day → Settings… → Calendar</strong>.</li>
-        <li>Under <strong>Calendar for new events</strong>, choose a calendar that allows changes.</li>
+        <li>In Day, open <strong>Settings → Calendar for new events</strong>.</li>
+        <li>Choose a calendar that allows changes, or choose <strong>Automatic</strong>.</li>
         <li>Read-only calendars, such as some subscribed calendars, cannot receive new events. If the list has no writable calendar, add one in Calendar or Internet Accounts, then reopen Day.</li>
       </ol>
 
-      <p>You can revoke Calendar access at any time in System Settings. Day keeps working for notes and tasks.</p>
+      <p>Day shows the calendars macOS Calendar already syncs. It does not add accounts itself. You can revoke Calendar access at any time in System Settings.</p>
+    </section>
+
+    <section aria-labelledby="notes">
+      <h2 id="notes">Optional Markdown notes</h2>
+      <p>Notes are off by default. To keep them, open <strong>Settings → Markdown notes → Choose folder</strong>. Day keeps one plain <code>YYYY-MM-DD.md</code> file per day in that folder, and you can open or edit it in any text editor.</p>
+      <ul>
+        <li>⌥Return keeps a note, and ⌘Return saves a task.</li>
+        <li><strong>Note</strong> on a meeting adds a meeting note.</li>
+        <li>All of these need a folder; scheduling does not.</li>
+        <li>Existing files are never rewritten beyond appended lines.</li>
+        <li>Tasks carry forward for up to 30 days; check them off or defer them.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="widgets">
+      <h2 id="widgets">Widgets</h2>
+      <p>Widgets show what is next on your calendar, and event rows open that event in Day. Checking off a task and the meeting <strong>Note</strong> action need a notes folder; without one, the widget shows calendar events only.</p>
+    </section>
+
+    <section aria-labelledby="not-saved">
+      <h2 id="not-saved">The event did not save, or the text disappeared</h2>
+      <p>Day keeps your text when a save fails. Check the message above the field: it usually points to Calendar access or a read-only calendar. Fix that, then press Return again.</p>
+      <p>If the text is gone, or the message does not help, email <a href="mailto:pzarudnev93@gmail.com?subject=Day%20support">pzarudnev93@gmail.com</a> with your macOS version, the steps, the expected and actual result, and a screenshot when it contains no personal data.</p>
     </section>
 
     <section aria-labelledby="report">
@@ -74,6 +95,7 @@
         <li>What you did, what you expected, and what happened.</li>
         <li>Whether Calendar access is on, and whether the notes folder is local or synced.</li>
       </ul>
+      <p>If you are testing a TestFlight build, you can also send feedback from the TestFlight app; it includes the build automatically.</p>
 
       <div class="callout">
         <h3>Do not send private attachments</h3>
@@ -82,6 +104,7 @@
     </section>
 
     <nav class="page-links" aria-label="More Day pages">
+      <a href="/day">Day product page</a>
       <a href="/day/privacy">Day privacy policy</a>
       <a href="/">Pavel Zarudnev's site</a>
     </nav>
