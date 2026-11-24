@@ -152,36 +152,19 @@
       white-space: nowrap;
     }
 
-    .shot-figure {
+    .shot {
       margin: 1.5rem 0;
     }
 
-    .shot-placeholder {
-      display: grid;
-      place-items: center;
-      gap: 0.35rem;
-      min-height: 220px;
-      padding: 2rem 1.25rem;
-      text-align: center;
-      border: 1px dashed #c9bfb4;
+    .shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--rule);
       border-radius: var(--radius);
-      background: var(--paper-inset);
-      color: var(--ink-muted);
     }
 
-    .shot-placeholder span:first-child {
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .shot-placeholder span:last-child {
-      font-size: 0.95rem;
-      max-width: 26rem;
-    }
-
-    .shot-figure figcaption {
+    .shot figcaption {
       font-size: 0.9rem;
       color: var(--ink-muted);
       margin-top: 0.5rem;
@@ -256,7 +239,7 @@
       <p class="lede">Day is a Mac menu-bar app for the moment you need to schedule something while you are busy doing something else. Type a sentence, check exactly what it will create, press Return. The event lands on the calendar you already use.</p>
 
       <div class="demo">
-        <p class="demo-label">Example — the panel, not a screenshot</p>
+        <p class="demo-label">Example</p>
         <p class="demo-line">Call Sarah tomorrow at 3pm for 45 minutes<span class="demo-caret" aria-hidden="true"></span></p>
         <dl class="demo-preview">
           <dt>Title</dt>
@@ -301,14 +284,12 @@
         </li>
       </ol>
 
-      <figure class="shot-figure">
-        <!-- TODO(screenshot): replace this placeholder with a real capture of the Day panel over another app, showing the typed line and its preview. Do not ship the placeholder. -->
-        <div class="shot-placeholder" role="img" aria-label="Placeholder for a screenshot of the Day panel over another app: the line Call Sarah tomorrow at 3pm for 45 minutes above a preview showing title, date, time, duration, and destination calendar.">
-          <span>Screenshot placeholder</span>
-          <span>The menu-bar panel over another app, with a typed line and its preview. A real capture will replace this before release.</span>
-        </div>
-        <figcaption>The panel stays small: one line in, the preview underneath, Return to save.</figcaption>
-      </figure>
+      <!-- Screenshot (lead): Day panel over another app — typed line + preview. Drop the capture here as
+           <figure class="shot">
+             <img src="day-panel.png" alt="The Day panel over another app, showing the typed line Call Sarah tomorrow at 3pm for 45 minutes and its preview with title, date, time, duration, and destination calendar.">
+             <figcaption>The panel stays small: one line in, the preview underneath, Return to save.</figcaption>
+           </figure>
+      -->
     </section>
 
     <section aria-labelledby="when">
@@ -321,7 +302,7 @@
     <section aria-labelledby="calendar">
       <h2 id="calendar">Works with your calendar</h2>
       <p>Day works with the calendars macOS already has — iCloud, Google, Exchange, or anything else you added in Calendar or Internet Accounts. Events are read and written through Apple’s EventKit. Day does not add accounts and does not run its own sync service.</p>
-      <p>The first launch asks for Calendar access. If you decline, Day tells you what to change and offers a button straight to <strong>System Settings › Privacy &amp; Security › Calendars</strong>. Scheduling needs that permission; notes never gate it. You can revoke access at any time.</p>
+      <p>Day asks for Calendar access when you press Return to save your first event, or any time from the banner or Settings. If you decline, Day tells you what to change and offers a button straight to <strong>System Settings › Privacy &amp; Security › Calendars</strong>, and your text stays in the panel. Scheduling needs that permission; typing and previewing do not. You can revoke access at any time.</p>
       <p>You choose which calendar receives new events. Read-only calendars, such as some subscriptions, cannot take new events; Day says so instead of failing silently.</p>
     </section>
 
@@ -340,26 +321,24 @@
     <section aria-labelledby="menubar">
       <h2 id="menubar">Menu bar, shortcut, and settings</h2>
       <p>Day lives in the menu bar. The global shortcut — <kbd>⌃⌥Space</kbd> by default, configurable — opens the panel from any app without opening the main window.</p>
-      <p>Settings cover the optional notes folder, the calendar for new events, the shortcut, and appearance, with visible links to the privacy policy and support.</p>
+      <p>Settings cover the shortcut, the calendar for new events, time format, appearance, working hours, open at login, and the optional notes folder.</p>
     </section>
 
     <section aria-labelledby="widgets">
       <h2 id="widgets">Widgets</h2>
-      <p>Desktop widgets show what is next on your calendar. You can check off a task from a widget too — but tasks need a folder, and the widget says so rather than pretending otherwise.</p>
+      <p>Desktop widgets show what is next on your calendar, and event rows open that event in Day. You can check off a task from a widget too — but tasks need a folder, and the widget says so rather than pretending otherwise.</p>
 
-      <figure class="shot-figure">
-        <!-- TODO(screenshot): replace this placeholder with a real capture of the Day desktop widgets. Do not ship the placeholder. -->
-        <div class="shot-placeholder" role="img" aria-label="Placeholder for a screenshot of the Day desktop widgets showing what is next on the calendar and a task with a checkbox.">
-          <span>Screenshot placeholder</span>
-          <span>The desktop widgets: what is next, and a task. A real capture will replace this before release.</span>
-        </div>
-        <figcaption>Widgets are honest about folders: calendar only without one, tasks when a folder is chosen.</figcaption>
-      </figure>
+      <!-- Screenshot (lead): Day desktop widgets — what's next, and a task with a checkbox. Drop the capture here as
+           <figure class="shot">
+             <img src="day-widgets.png" alt="The Day desktop widgets: what is next on the calendar, and a task with a checkbox.">
+             <figcaption>Widgets are honest about folders: calendar only without one, tasks when a folder is chosen.</figcaption>
+           </figure>
+      -->
     </section>
 
     <section aria-labelledby="privacy">
       <h2 id="privacy">Privacy first</h2>
-      <p>No account. No sign-in, no hosted sync, no analytics, no third-party SDK. Your files stay on your Mac, and Day reaches your calendar through EventKit only after you grant permission. If you put the notes folder in iCloud Drive, Dropbox, or another synced location, that provider handles the files under its own policy.</p>
+      <p>No account, no sign-in, no hosted sync, no analytics, no third-party SDK. Day reaches your calendar through EventKit only after you grant permission. If you put the notes folder in iCloud Drive, Dropbox, OneDrive, or another synced location, that provider syncs the files under its own policy — Day does not.</p>
       <p>Read the <a href="/day/privacy">Day privacy policy</a>, or visit <a href="/day/support">Day support</a> if something is not working.</p>
     </section>
 
