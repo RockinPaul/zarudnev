@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Day — Put it on your calendar in one line</title>
+  <meta name="description" content="Day puts an event on your existing Mac calendar in one line: type it, check the preview, press Return. Optional Markdown notes, menu bar shortcut, widgets. macOS 14 or later.">
+  <link rel="canonical" href="https://zarudnev.com/day">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/day/day.css">
+  <style>
+    .hero {
+      margin-bottom: 2.5rem;
+    }
+
+    .hero .lede {
+      font-size: 1.2rem;
+      max-width: 36rem;
+    }
+
+    .demo {
+      background: var(--paper-raised);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.2rem 1.2rem;
+      margin: 1.75rem 0 1.25rem;
+      box-shadow: 0 1px 2px rgba(26, 20, 24, 0.04);
+    }
+
+    .demo-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin: 0 0 0.75rem;
+    }
+
+    .demo-line {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.95rem;
+      background: var(--paper-inset);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 0.7rem 0.8rem;
+      margin: 0 0 1rem;
+      overflow-wrap: anywhere;
+    }
+
+    .demo-caret {
+      display: inline-block;
+      width: 1px;
+      height: 1.05em;
+      margin-left: 1px;
+      vertical-align: -0.15em;
+      background: var(--ink);
+    }
+
+    .demo-preview {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 0.35rem 1.25rem;
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .demo-preview dt {
+      color: var(--ink-muted);
+    }
+
+    .demo-preview dd {
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .demo-hint {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      margin: 1rem 0 0;
+      border-top: 1px solid var(--rule);
+      padding-top: 0.75rem;
+    }
+
+    .store-cta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem 1rem;
+      margin: 0 0 0.5rem;
+    }
+
+    .store-button {
+      font: inherit;
+      font-weight: 600;
+      padding: 0.65rem 1.1rem;
+      border-radius: 999px;
+      border: 1px dashed var(--rule);
+      background: var(--paper-inset);
+      color: var(--ink-muted);
+      cursor: not-allowed;
+    }
+
+    .store-note {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      margin: 0;
+    }
+
+    .steps {
+      list-style: none;
+      counter-reset: step;
+      padding: 0;
+      margin: 1.25rem 0 0;
+    }
+
+    .steps > li {
+      position: relative;
+      counter-increment: step;
+      padding-left: 2.75rem;
+      margin: 0 0 1.4rem;
+    }
+
+    .steps > li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0.1rem;
+      width: 1.85rem;
+      height: 1.85rem;
+      border-radius: 50%;
+      background: var(--accent-fill);
+      color: #ffffff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+    }
+
+    .step-title {
+      display: block;
+      font-weight: 700;
+    }
+
+    kbd {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.85em;
+      background: var(--paper-raised);
+      border: 1px solid var(--rule);
+      border-bottom-width: 2px;
+      border-radius: 4px;
+      padding: 0.1em 0.4em;
+      white-space: nowrap;
+    }
+
+    .shot-figure {
+      margin: 1.5rem 0;
+    }
+
+    .shot-placeholder {
+      display: grid;
+      place-items: center;
+      gap: 0.35rem;
+      min-height: 220px;
+      padding: 2rem 1.25rem;
+      text-align: center;
+      border: 1px dashed #c9bfb4;
+      border-radius: var(--radius);
+      background: var(--paper-inset);
+      color: var(--ink-muted);
+    }
+
+    .shot-placeholder span:first-child {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .shot-placeholder span:last-child {
+      font-size: 0.95rem;
+      max-width: 26rem;
+    }
+
+    .shot-figure figcaption {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      margin-top: 0.5rem;
+    }
+
+    .facts {
+      list-style: none;
+      padding: 0;
+      margin: 1.25rem 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+      gap: 0.75rem;
+    }
+
+    .facts li {
+      background: var(--paper-raised);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 0.8rem 0.95rem;
+      font-size: 0.95rem;
+    }
+
+    .facts strong {
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    .closing {
+      background: var(--paper-raised);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.2rem;
+      margin: 2.5rem 0 0;
+    }
+
+    .closing h2 {
+      margin-top: 0;
+    }
+
+    .closing p:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 520px) {
+      .demo-preview {
+        grid-template-columns: 1fr;
+        gap: 0.1rem;
+      }
+
+      .demo-preview dd {
+        margin-bottom: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span>Day</a>
+      <nav class="site-nav" aria-label="Day pages">
+        <a href="/day/support">Support</a>
+        <a href="/day/privacy">Privacy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="title">
+      <h1 id="title">Put it on your calendar in one line.</h1>
+      <p class="lede">Day is a Mac menu-bar app for the moment you need to schedule something while you are busy doing something else. Type a sentence, check exactly what it will create, press Return. The event lands on the calendar you already use.</p>
+
+      <div class="demo">
+        <p class="demo-label">Example — the panel, not a screenshot</p>
+        <p class="demo-line">Call Sarah tomorrow at 3pm for 45 minutes<span class="demo-caret" aria-hidden="true"></span></p>
+        <dl class="demo-preview">
+          <dt>Title</dt>
+          <dd>Call Sarah</dd>
+          <dt>Date</dt>
+          <dd>Tomorrow</dd>
+          <dt>Time</dt>
+          <dd>3:00 – 3:45 PM</dd>
+          <dt>Duration</dt>
+          <dd>45 minutes</dd>
+          <dt>Calendar</dt>
+          <dd>Personal</dd>
+        </dl>
+        <p class="demo-hint">Return saves exactly this. Esc closes the panel without saving.</p>
+      </div>
+
+      <div class="store-cta">
+        <!-- TODO(release): Mac App Store link once the listing is live (lead confirms). -->
+        <button class="store-button" type="button" disabled>Mac App Store — coming soon</button>
+        <p class="store-note">Day is in beta testing. The Mac App Store listing is not live yet.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="flow">
+      <h2 id="flow">Type it. Preview it. Return.</h2>
+      <ol class="steps">
+        <li>
+          <span class="step-title">Open the panel from anywhere</span>
+          Press <kbd>⌃⌥Space</kbd> in whatever app you are in. The Day panel appears over your work; the main window stays closed. You can change the shortcut in Settings.
+        </li>
+        <li>
+          <span class="step-title">Type one line</span>
+          Write it the way you would say it: <code>Call Sarah tomorrow at 3pm for 45 minutes</code>. Day reads the title, date, time, and duration from the sentence.
+        </li>
+        <li>
+          <span class="step-title">Check the preview</span>
+          Before anything is written, Day shows exactly what it will create: title, date, time, duration, and the calendar that will receive it. If the preview is not what you meant, fix the line.
+        </li>
+        <li>
+          <span class="step-title">Press Return</span>
+          Return confirms what the preview showed and saves the event to your existing calendar. Esc closes the panel without saving.
+        </li>
+      </ol>
+
+      <figure class="shot-figure">
+        <!-- TODO(screenshot): replace this placeholder with a real capture of the Day panel over another app, showing the typed line and its preview. Do not ship the placeholder. -->
+        <div class="shot-placeholder" role="img" aria-label="Placeholder for a screenshot of the Day panel over another app: the line Call Sarah tomorrow at 3pm for 45 minutes above a preview showing title, date, time, duration, and destination calendar.">
+          <span>Screenshot placeholder</span>
+          <span>The menu-bar panel over another app, with a typed line and its preview. A real capture will replace this before release.</span>
+        </div>
+        <figcaption>The panel stays small: one line in, the preview underneath, Return to save.</figcaption>
+      </figure>
+    </section>
+
+    <section aria-labelledby="when">
+      <h2 id="when">No time in the line? Day asks “When?”</h2>
+      <p>Type <code>Call Sarah</code> and press Return, and Day asks <strong>When?</strong> instead of guessing. Your text stays exactly as you wrote it, keyboard focus stays in the panel, and nothing is written.</p>
+      <p>Add the time — <code>tomorrow 3pm</code> — and the preview resolves. One Return then creates one event.</p>
+      <p>Press Return again on the same bare text and nothing changes: no duplicate, no lost text. If a calendar is not writable or an event fails to save, the text stays in the panel so you can fix it and try again.</p>
+    </section>
+
+    <section aria-labelledby="calendar">
+      <h2 id="calendar">Works with your calendar</h2>
+      <p>Day works with the calendars macOS already has — iCloud, Google, Exchange, or anything else you added in Calendar or Internet Accounts. Events are read and written through Apple’s EventKit. Day does not add accounts and does not run its own sync service.</p>
+      <p>The first launch asks for Calendar access. If you decline, Day tells you what to change and offers a button straight to <strong>System Settings › Privacy &amp; Security › Calendars</strong>. Scheduling needs that permission; notes never gate it. You can revoke access at any time.</p>
+      <p>You choose which calendar receives new events. Read-only calendars, such as some subscriptions, cannot take new events; Day says so instead of failing silently.</p>
+    </section>
+
+    <section aria-labelledby="notes">
+      <h2 id="notes">Optional Markdown records</h2>
+      <p>Scheduling does not need a folder. If you want a written record too, choose a folder in Settings and Day keeps one plain Markdown file per day, named <code>YYYY-MM-DD.md</code>, beside your calendar.</p>
+      <ul>
+        <li>One file per day, open and editable in any text editor.</li>
+        <li>Existing files and preferences are respected.</li>
+        <li>Open tasks carry forward for up to 30 days; check them off or defer them.</li>
+        <li>Notes are opt-in and explicit. The shortcut is for scheduling.</li>
+      </ul>
+      <p>An explicit action on a calendar event adds a note to that meeting. It needs a folder, and only that action targets a meeting.</p>
+    </section>
+
+    <section aria-labelledby="menubar">
+      <h2 id="menubar">Menu bar, shortcut, and settings</h2>
+      <p>Day lives in the menu bar. The global shortcut — <kbd>⌃⌥Space</kbd> by default, configurable — opens the panel from any app without opening the main window.</p>
+      <p>Settings cover the optional notes folder, the calendar for new events, the shortcut, and appearance, with visible links to the privacy policy and support.</p>
+    </section>
+
+    <section aria-labelledby="widgets">
+      <h2 id="widgets">Widgets</h2>
+      <p>Desktop widgets show what is next on your calendar. You can check off a task from a widget too — but tasks need a folder, and the widget says so rather than pretending otherwise.</p>
+
+      <figure class="shot-figure">
+        <!-- TODO(screenshot): replace this placeholder with a real capture of the Day desktop widgets. Do not ship the placeholder. -->
+        <div class="shot-placeholder" role="img" aria-label="Placeholder for a screenshot of the Day desktop widgets showing what is next on the calendar and a task with a checkbox.">
+          <span>Screenshot placeholder</span>
+          <span>The desktop widgets: what is next, and a task. A real capture will replace this before release.</span>
+        </div>
+        <figcaption>Widgets are honest about folders: calendar only without one, tasks when a folder is chosen.</figcaption>
+      </figure>
+    </section>
+
+    <section aria-labelledby="privacy">
+      <h2 id="privacy">Privacy first</h2>
+      <p>No account. No sign-in, no hosted sync, no analytics, no third-party SDK. Your files stay on your Mac, and Day reaches your calendar through EventKit only after you grant permission. If you put the notes folder in iCloud Drive, Dropbox, or another synced location, that provider handles the files under its own policy.</p>
+      <p>Read the <a href="/day/privacy">Day privacy policy</a>, or visit <a href="/day/support">Day support</a> if something is not working.</p>
+    </section>
+
+    <section aria-labelledby="requirements">
+      <h2 id="requirements">Requirements</h2>
+      <ul class="facts">
+        <li><strong>macOS 14 or later</strong>Sonoma or newer.</li>
+        <li><strong>Apple silicon + Intel</strong>One universal app.</li>
+        <li><strong>Menu bar + widgets</strong>The app and its desktop widgets.</li>
+        <li><strong>No account</strong>Nothing to sign in to.</li>
+      </ul>
+      <p>Day is in beta. This page describes the feature set it ships with; the Mac App Store listing is not live yet.</p>
+    </section>
+
+    <div class="closing">
+      <h2>One line, one event</h2>
+      <p>That is the whole idea: say what you need, see what it will create, press Return. Everything else in Day is optional.</p>
+      <!-- TODO(release): Mac App Store link once the listing is live (lead confirms). -->
+      <p><button class="store-button" type="button" disabled>Mac App Store — coming soon</button></p>
+    </div>
+
+    <nav class="page-links" aria-label="More Day pages">
+      <a href="/day/support">Day support</a>
+      <a href="/day/privacy">Day privacy policy</a>
+      <a href="/">Pavel Zarudnev's site</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p>Day is developed by Pavel Zarudnev.</p>
+      <p>Support and privacy: <a href="/day/support">Support</a> · <a href="/day/privacy">Privacy</a></p>
+    </div>
+  </footer>
+</body>
+</html>
