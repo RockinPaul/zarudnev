@@ -175,6 +175,7 @@
     .compare-state img {
       display: block;
       width: 100%;
+      max-width: 800px;
       height: auto;
       aspect-ratio: 800 / 784;
       object-fit: contain;
@@ -292,7 +293,7 @@
         <p class="demo-hint">Return saves exactly this. Esc closes the panel without saving.</p>
       </div>
 
-      <!-- Screenshot (lead): Day panel over another app — typed line + preview. Drop the capture here as
+      <!-- TODO(screenshot): Day panel over another app — typed line + preview. Drop the capture here as
            <figure class="shot">
              <img src="day-panel.png" alt="The Day panel over another app, showing the typed line Call Sarah tomorrow at 3pm for 45 minutes and its preview with title, date, time, duration, and destination calendar.">
              <figcaption>The panel stays small: one line in, the preview underneath, Return to save.</figcaption>
@@ -317,14 +318,13 @@
       <p>Change 45 to 30 and the end time follows — nothing is saved until you press Return.</p>
 
       <div class="compare" data-compare>
-        <!-- TODO(capture): lead supplies native 2x captures at day/assets/demo-45m@2x.png and day/assets/demo-30m@2x.png. Do not commit WIP pixels. -->
         <div class="compare-pair">
           <figure class="compare-state" data-compare-state="45">
-            <img src="/day/assets/demo-45m@2x.png" alt="Day preview before saving: Call Sarah tomorrow at 3pm for 45 minutes, ending at 3:45 PM, with the destination calendar." width="1600" height="1568">
+            <img src="/day/assets/demo-45m@2x.png" alt="Day preview before saving: Call Sarah tomorrow at 3pm for 45 minutes, ending at 3:45 PM, with the destination calendar." width="800" height="784">
             <figcaption>45 minutes</figcaption>
           </figure>
           <figure class="compare-state" data-compare-state="30">
-            <img src="/day/assets/demo-30m@2x.png" alt="Day preview after changing the duration to 30 minutes: Call Sarah tomorrow at 3pm, ending at 3:30 PM, before saving." width="1600" height="1568">
+            <img src="/day/assets/demo-30m@2x.png" alt="Day preview after changing the duration to 30 minutes: Call Sarah tomorrow at 3pm, ending at 3:30 PM, before saving." width="800" height="784">
             <figcaption>30 minutes — the end time follows before saving</figcaption>
           </figure>
         </div>
@@ -362,7 +362,7 @@
       <h2 id="widgets">Widgets</h2>
       <p>Widgets show what is next on your calendar; checking off a task needs a notes folder.</p>
 
-      <!-- Screenshot (lead): Day desktop widgets — what's next, and a task with a checkbox. Drop the capture here as
+      <!-- TODO(screenshot): Day desktop widgets — what's next, and a task with a checkbox. Drop the capture here as
            <figure class="shot">
              <img src="day-widgets.png" alt="The Day desktop widgets: what is next on the calendar, and a task with a checkbox.">
              <figcaption>Widgets are honest about folders: calendar only without one, tasks when a folder is chosen.</figcaption>
