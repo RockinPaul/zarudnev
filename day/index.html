@@ -158,6 +158,92 @@
       margin-bottom: 0.15rem;
     }
 
+    .compare {
+      margin: 1.5rem 0 0;
+    }
+
+    .compare-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .compare-state {
+      margin: 0;
+    }
+
+    .compare-state img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 800 / 784;
+      object-fit: contain;
+      background: var(--paper-inset);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      color: var(--ink-muted);
+      font-size: 0.9rem;
+    }
+
+    .compare-state img.is-missing {
+      aspect-ratio: auto;
+      min-height: 4rem;
+      padding: 1rem;
+    }
+
+    .compare-state figcaption {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      margin-top: 0.4rem;
+    }
+
+    .compare-controls {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .compare-controls button {
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--rule);
+      background: var(--paper-raised);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .compare-controls button[aria-pressed="true"] {
+      background: var(--accent-fill);
+      border-color: var(--accent-fill);
+      color: #ffffff;
+    }
+
+    .compare-controls button:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .compare.is-enhanced .compare-pair {
+      grid-template-columns: 1fr;
+    }
+
+    .compare.is-enhanced .compare-state {
+      display: none;
+    }
+
+    .compare.is-enhanced .compare-state.is-active {
+      display: block;
+    }
+
+    @media (max-width: 640px) {
+      .compare-pair {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 520px) {
       .demo-preview {
         grid-template-columns: 1fr;
@@ -226,6 +312,37 @@
       <p><a href="/day/support">Troubleshooting → Support</a></p>
     </section>
 
+    <section aria-labelledby="duration">
+      <h2 id="duration">Change the duration before you save</h2>
+      <p>Change 45 to 30 and the end time follows — nothing is saved until you press Return.</p>
+
+      <div class="compare" data-compare>
+        <!-- TODO(capture): lead supplies native 2x captures at day/assets/demo-45m@2x.png and day/assets/demo-30m@2x.png. Do not commit WIP pixels. -->
+        <div class="compare-pair">
+          <figure class="compare-state" data-compare-state="45">
+            <img src="/day/assets/demo-45m@2x.png" alt="Day preview before saving: Call Sarah tomorrow at 3pm for 45 minutes, ending at 3:45 PM, with the destination calendar." width="1600" height="1568">
+            <figcaption>45 minutes</figcaption>
+          </figure>
+          <figure class="compare-state" data-compare-state="30">
+            <img src="/day/assets/demo-30m@2x.png" alt="Day preview after changing the duration to 30 minutes: Call Sarah tomorrow at 3pm, ending at 3:30 PM, before saving." width="1600" height="1568">
+            <figcaption>30 minutes — the end time follows before saving</figcaption>
+          </figure>
+        </div>
+
+        <div class="compare-controls" data-compare-controls hidden>
+          <button type="button" data-compare-button="45" aria-pressed="true">45 min</button>
+          <button type="button" data-compare-button="30" aria-pressed="false">30 min</button>
+        </div>
+
+        <noscript>
+          <style>
+            .compare-state { display: block !important; }
+            .compare-controls { display: none !important; }
+          </style>
+        </noscript>
+      </div>
+    </section>
+
     <section aria-labelledby="notes">
       <h2 id="notes">Optional Markdown notes</h2>
       <p>Want notes too? Choose a folder in Settings and Day keeps one plain file per day — not required.</p>
@@ -281,5 +398,73 @@
       <p>Support and privacy: <a href="/day/support">Support</a> · <a href="/day/privacy">Privacy</a></p>
     </div>
   </footer>
+
+  <script>
+    (() => {
+      const root = document.querySelector('[data-compare]');
+      if (!root) return;
+      const states = [...root.querySelectorAll('[data-compare-state]')];
+      const controls = root.querySelector('[data-compare-controls]');
+      const buttons = [...controls.querySelectorAll('button')];
+      const motion = window.matchMedia('(prefers-reduced-motion: no-preference)');
+      let paused = false;
+      let stopped = false;
+      let timer = null;
+
+      states.forEach((state) => {
+        const img = state.querySelector('img');
+        if (!img) return;
+        const markMissing = () => img.classList.add('is-missing');
+        img.addEventListener('error', markMissing);
+        if (img.complete && img.naturalWidth === 0) markMissing();
+      });
+
+      const show = (value) => {
+        states.forEach((state) => state.classList.toggle('is-active', state.dataset.compareState === value));
+        buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.compareButton === value)));
+      };
+
+      const inView = () => {
+        const rect = root.getBoundingClientRect();
+        return rect.bottom > 0 && rect.top < window.innerHeight;
+      };
+
+      const sync = () => {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+        if (!motion.matches || paused || stopped) return;
+        timer = setInterval(() => {
+          if (!inView()) return;
+          const active = root.querySelector('.compare-state.is-active');
+          show(active && active.dataset.compareState === '45' ? '30' : '45');
+        }, 2500);
+      };
+
+      root.classList.add('is-enhanced');
+      controls.hidden = false;
+      show('45');
+      sync();
+
+      buttons.forEach((button) => button.addEventListener('click', () => {
+        stopped = true;
+        show(button.dataset.compareButton);
+        sync();
+      }));
+
+      root.addEventListener('pointerenter', () => { paused = true; sync(); });
+      root.addEventListener('pointerleave', () => { paused = false; sync(); });
+      root.addEventListener('focusin', () => { paused = true; sync(); });
+      root.addEventListener('focusout', (event) => {
+        if (!root.contains(event.relatedTarget)) {
+          paused = false;
+          sync();
+        }
+      });
+
+      motion.addEventListener('change', sync);
+    })();
+  </script>
 </body>
 </html>
